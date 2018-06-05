@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/vue.min..js"></script>
+    <script src="../js/axios.min.js"></script>
+</head>
+<body>
+   <div id="container">
+        <ul class="news-ul">
+            <li v-for="(item,index) in newsData">
+                <h3>{{item.tit}}</h3>
+                <p>
+                    {{item.time}}
+                </p>
+            </li>
+        </ul>
+   </div>
+</body>
+
+</html>
+<script>
+
+    new Vue({
+        el:'#container',
+        data:function () {  
+            return {
+                newsData:[]
+            }
+        },
+        created(){
+            axios.get('../../api/newsList.json')
+                .then( ({data}) =>{
+                    this.newsData = data.data; 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        },
+        mounted(){
+
+        },
+        methods:{
+
+        }
+
+    })
+
+</script>
